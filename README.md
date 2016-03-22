@@ -1,15 +1,23 @@
------- Currently Under Development -----------
+** ------ Currently Under Development ----------- **
 
-INSTRUCTION:
+**1. INSTRUCTION:**
  
-Use amcl.launch for navaigation using odometry provided by NAO robot.
-Use amcl_scanmatch.launch for navigation using laser scan data as odometry.
-Use gtest.launch for mapping using gmapping
-use htest.launch for mapping using hector mapping
+  * Use amcl.launch for navaigation using odometry provided by NAO robot.
 
-In the launch files make sure to change the paths to config files accordingly.
+  * Use amcl_scanmatch.launch for navigation using laser scan data as odometry.
 
-KNOWN BUGS:
-1. Move_base demonstrates weird behaviors (seemingly unnecessary rotation).
-2. Laser_scan_matcher loses target when robot is rotated in place of approximately 90 degrees or more.
+  * Use gtest.launch for mapping using gmapping
+
+  * Use htest.launch for mapping using hector mapping
+
+  * - [x] In the launch files make sure to change the paths to config files accordingly.
+
+**2. KNOWN BUGS:**
+  1. Move_base demonstrates weird behaviors (seemingly unnecessary rotation).
+
+  2. Laser_scan_matcher loses target when robot is rotated in place of approximately 90 degrees or more.
+
+  3. Error message "Error while transforming pose: "base_footprint" passed to lookupTransform argument target_frame does not exist." when assigning a goal in rviz.
+
+  4. for larger maps, path planner is not able to plan a complete (only a short segment).
  
