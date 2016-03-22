@@ -65,11 +65,11 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
 
   <!-- To start move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" />
   </node>
   
   <!-- TF starts here ... -->
@@ -79,7 +79,7 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
   <!-- <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 100" /> -->
 
   <!-- rviz for visulization -->
-  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/jerry/Desktop/nao_gmapping/launch/rviz_cfg.rviz"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/jerry/Desktop/nao_slam_amcl/launch/rviz_cfg.rviz"/>
 
 </launch>
 

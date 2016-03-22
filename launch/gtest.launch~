@@ -27,7 +27,7 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
   <param name="llsamplestep" value="0.3" />
   <param name="temporalUpdate" value="5.0" />
   <param name="iterations" value="5" />
-  <param name="delta" value="0.025" />
+  <param name="delta" value="0.05" />
   <param name="maxRange" value="5.5" />
   <param name="map_frame" value="map" />
   <param name="map_update_interval" value="1.0" />
@@ -65,11 +65,11 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
 
   <!-- To start move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" />
   </node>
   
   <!-- TF starts here ... -->

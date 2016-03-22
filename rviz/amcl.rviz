@@ -12,6 +12,7 @@ Panels:
         - /Inflated Obstacles1
         - /Pose Array1
         - /TF1/Frames1
+        - /Pose1
       Splitter Ratio: 0.652174
     Tree Height: 721
   - Class: rviz/Selection
@@ -57,13 +58,13 @@ Visualization Manager:
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 221; 200; 14
-      Enabled: true
+      Enabled: false
       Keep: 100
       Length: 0.7
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /odom
-      Value: true
+      Value: false
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
@@ -586,333 +587,40 @@ Visualization Manager:
       Topic: /particlecloud
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        CameraBottom_frame:
-          Value: true
-        CameraBottom_optical_frame:
-          Value: true
-        CameraTop_frame:
-          Value: true
-        CameraTop_optical_frame:
-          Value: true
-        ChestButton_frame:
-          Value: true
-        Head:
-          Value: true
-        HeadTouchFront_frame:
-          Value: true
-        HeadTouchMiddle_frame:
-          Value: true
-        HeadTouchRear_frame:
-          Value: true
-        ImuTorsoAccelerometer_frame:
-          Value: true
-        ImuTorsoGyrometer_frame:
-          Value: true
-        LAnklePitch:
-          Value: true
-        LBicep:
-          Value: true
-        LElbow:
-          Value: true
-        LFinger11_link:
-          Value: true
-        LFinger12_link:
-          Value: true
-        LFinger13_link:
-          Value: true
-        LFinger21_link:
-          Value: true
-        LFinger22_link:
-          Value: true
-        LFinger23_link:
-          Value: true
-        LFootBumperLeft_frame:
-          Value: true
-        LFootBumperRight_frame:
-          Value: true
-        LForeArm:
-          Value: true
-        LFsrFL_frame:
-          Value: true
-        LFsrFR_frame:
-          Value: true
-        LFsrRL_frame:
-          Value: true
-        LFsrRR_frame:
-          Value: true
-        LHandTouchBack_frame:
-          Value: true
-        LHandTouchLeft_frame:
-          Value: true
-        LHandTouchRight_frame:
-          Value: true
-        LHip:
-          Value: true
-        LInfraRed_frame:
-          Value: true
-        LPelvis:
-          Value: true
-        LShoulder:
-          Value: true
-        LSonar_frame:
-          Value: true
-        LThigh:
-          Value: true
-        LThumb1_link:
-          Value: true
-        LThumb2_link:
-          Value: true
-        LTibia:
-          Value: true
-        MicroFrontCenter_frame:
-          Value: true
-        MicroRearCenter_frame:
-          Value: true
-        MicroSurroundLeft_frame:
-          Value: true
-        MicroSurroundRight_frame:
-          Value: true
-        Neck:
-          Value: true
-        RAnklePitch:
-          Value: true
-        RBicep:
-          Value: true
-        RElbow:
-          Value: true
-        RFinger11_link:
-          Value: true
-        RFinger12_link:
-          Value: true
-        RFinger13_link:
-          Value: true
-        RFinger21_link:
-          Value: true
-        RFinger22_link:
-          Value: true
-        RFinger23_link:
-          Value: true
-        RFootBumperLeft_frame:
-          Value: true
-        RFootBumperRight_frame:
-          Value: true
-        RForeArm:
-          Value: true
-        RFsrFL_frame:
-          Value: true
-        RFsrFR_frame:
-          Value: true
-        RFsrRL_frame:
-          Value: true
-        RFsrRR_frame:
-          Value: true
-        RHandTouchBack_frame:
-          Value: true
-        RHandTouchLeft_frame:
-          Value: true
-        RHandTouchRight_frame:
-          Value: true
-        RHip:
-          Value: true
-        RInfraRed_frame:
-          Value: true
-        RPelvis:
-          Value: true
-        RShoulder:
-          Value: true
-        RSonar_frame:
-          Value: true
-        RThigh:
-          Value: true
-        RThumb1_link:
-          Value: true
-        RThumb2_link:
-          Value: true
-        RTibia:
-          Value: true
-        base_footprint:
-          Value: true
-        base_link:
-          Value: true
-        gaze:
-          Value: true
-        l_ankle:
-          Value: true
-        l_gripper:
-          Value: true
-        l_sole:
-          Value: true
-        l_wrist:
-          Value: true
-        laser:
-          Value: true
-        map:
-          Value: true
-        odom:
-          Value: true
-        r_ankle:
-          Value: true
-        r_gripper:
-          Value: true
-        r_sole:
-          Value: true
-        r_wrist:
-          Value: true
-        torso:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: false
       Show Axes: false
       Show Names: true
       Tree:
-        map:
-          odom:
-            base_link:
-              base_footprint:
-                {}
-              laser:
-                {}
-              torso:
-                ChestButton_frame:
-                  {}
-                ImuTorsoAccelerometer_frame:
-                  {}
-                ImuTorsoGyrometer_frame:
-                  {}
-                LPelvis:
-                  LHip:
-                    LThigh:
-                      LTibia:
-                        LAnklePitch:
-                          l_ankle:
-                            LFootBumperLeft_frame:
-                              {}
-                            LFootBumperRight_frame:
-                              {}
-                            LFsrFL_frame:
-                              {}
-                            LFsrFR_frame:
-                              {}
-                            LFsrRL_frame:
-                              {}
-                            LFsrRR_frame:
-                              {}
-                            l_sole:
-                              {}
-                LShoulder:
-                  LBicep:
-                    LElbow:
-                      LForeArm:
-                        l_wrist:
-                          LFinger11_link:
-                            LFinger12_link:
-                              LFinger13_link:
-                                {}
-                          LFinger21_link:
-                            LFinger22_link:
-                              LFinger23_link:
-                                {}
-                          LHandTouchBack_frame:
-                            {}
-                          LHandTouchLeft_frame:
-                            {}
-                          LHandTouchRight_frame:
-                            {}
-                          LThumb1_link:
-                            LThumb2_link:
-                              {}
-                          l_gripper:
-                            {}
-                LSonar_frame:
-                  {}
-                Neck:
-                  Head:
-                    CameraBottom_frame:
-                      CameraBottom_optical_frame:
-                        {}
-                    CameraTop_frame:
-                      CameraTop_optical_frame:
-                        {}
-                    HeadTouchFront_frame:
-                      {}
-                    HeadTouchMiddle_frame:
-                      {}
-                    HeadTouchRear_frame:
-                      {}
-                    LInfraRed_frame:
-                      {}
-                    MicroFrontCenter_frame:
-                      {}
-                    MicroRearCenter_frame:
-                      {}
-                    MicroSurroundLeft_frame:
-                      {}
-                    MicroSurroundRight_frame:
-                      {}
-                    RInfraRed_frame:
-                      {}
-                    gaze:
-                      {}
-                RPelvis:
-                  RHip:
-                    RThigh:
-                      RTibia:
-                        RAnklePitch:
-                          r_ankle:
-                            RFootBumperLeft_frame:
-                              {}
-                            RFootBumperRight_frame:
-                              {}
-                            RFsrFL_frame:
-                              {}
-                            RFsrFR_frame:
-                              {}
-                            RFsrRL_frame:
-                              {}
-                            RFsrRR_frame:
-                              {}
-                            r_sole:
-                              {}
-                RShoulder:
-                  RBicep:
-                    RElbow:
-                      RForeArm:
-                        r_wrist:
-                          RFinger11_link:
-                            RFinger12_link:
-                              RFinger13_link:
-                                {}
-                          RFinger21_link:
-                            RFinger22_link:
-                              RFinger23_link:
-                                {}
-                          RHandTouchBack_frame:
-                            {}
-                          RHandTouchLeft_frame:
-                            {}
-                          RHandTouchRight_frame:
-                            {}
-                          RThumb1_link:
-                            RThumb2_link:
-                              {}
-                          r_gripper:
-                            {}
-                RSonar_frame:
-                  {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 0.3
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Global CostMap
       Topic: /move_base/global_costmap/costmap
+      Value: false
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.1
+      Class: rviz/Pose
+      Color: 255; 255; 127
+      Enabled: true
+      Head Length: 0.3
+      Head Radius: 0.1
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05
+      Shape: Arrow
+      Topic: /pose_stamped
       Value: true
   Enabled: true
   Global Options:
@@ -941,11 +649,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 201.505
+      Scale: 184.21
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 3.31403
-      Y: 1.78708
+      X: 1.62191
+      Y: -2.31726
     Saved: ~
 Window Geometry:
   Displays:
@@ -963,5 +671,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1404
-  X: 506
-  Y: 37
+  X: 148
+  Y: 14

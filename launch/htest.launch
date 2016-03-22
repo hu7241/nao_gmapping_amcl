@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!-- authored by Jerry Hu from Win Win Industrial ltd.
+this launch file remotely starts a rplidar node on NAO robot, and use it for gmapping slam --> 
+
+<launch>
+  <!-- Below is for starting Hector_mapping --> 
+  <arg name="tf_map_scanmatch_transform_frame_name" default="scanmatcher_frame"/>
+  <arg name="base_frame" default="base_footprint"/>
+  <arg name="odom_frame" default="odom"/>
+  <arg name="pub_map_odom_transform" default="false"/>
+  <arg name="scan_subscriber_queue_size" default="5"/>
+  <arg name="scan_topic" default="scan"/>
+  <arg name="map_size" default="2048"/>
+  
+  <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
+    
+    <!-- Frame names -->
+    <param name="map_frame" value="map" />
+    <param name="base_frame" value="$(arg base_frame)" />
+    <param name="odom_frame" value="$(arg odom_frame)" />
+    
+    <!-- Tf use -->
+    <param name="use_tf_scan_transformation" value="true"/>
+    <param name="use_tf_pose_start_estimate" value="false"/>
+    <param name="pub_map_odom_transform" value="$(arg pub_map_odom_transform)"/>
+    
+    <!-- Scanning Parameters -->
+    <param name="laser_max_dist" value="6.0" />
+
+    <!-- Map size / start point -->
+    <param name="map_resolution" value="0.050"/>
+    <param name="map_size" value="$(arg map_size)"/>
+    <param name="map_start_x" value="0.5"/>
+    <param name="map_start_y" value="0.5" />
+    <param name="map_multi_res_levels" value="2" />
+    
+    <!-- Map update parameters -->
+    <param name="update_factor_free" value="0.4"/>
+    <param name="update_factor_occupied" value="0.9" />    
+    <param name="map_update_distance_thresh" value="0.02"/> <!--0.4 -->
+    <param name="map_update_angle_thresh" value="0.02" />  <!--0.06-->
+    <param name="laser_z_min_value" value = "-1.0" />
+    <param name="laser_z_max_value" value = "1.0" />
+    
+    <!-- Advertising config --> 
+    <param name="advertise_map_service" value="true"/>
+    
+    <param name="scan_subscriber_queue_size" value="$(arg scan_subscriber_queue_size)"/>
+    <param name="scan_topic" value="$(arg scan_topic)"/>
+    <param name="tf_map_scanmatch_transform_frame_name" value="$(arg tf_map_scanmatch_transform_frame_name)" />
+  </node>
+  
+  <!-- Here is geotiff_mapper -->
+  <node pkg="hector_geotiff" type="geotiff_node" name="hector_height_geotiff_node" output="screen" launch-prefix="nice -n 15">
+    <remap from="map" to="height_map" />
+    <param name="map_file_path" type="string" value="$(find hector_geotiff)/maps" />
+    <param name="map_file_base_name" type="string" value="RRL_2012_HectorDarmstadt_2m" />
+    <param name="geotiff_save_period" type="double" value="55" />
+    <param name="draw_background_checkerboard" type="bool" value="true" />
+    <param name="draw_free_space_grid" type="bool" value="true" />
+  </node>
+ 
+  <!-- Here goes geotiff_mapper node -->
+  <arg name="trajectory_source_frame_name" default="/base_link"/>
+  <arg name="trajectory_update_rate" default="4"/>
+  <arg name="trajectory_publish_rate" default="0.25"/>
+  <arg name="map_file_path" default="$(find hector_geotiff)/maps"/>
+  <arg name="map_file_base_name" default="hector_slam_map"/>
+
+  <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen">
+    <param name="target_frame_name" type="string" value="/map" />
+    <param name="source_frame_name" type="string" value="$(arg trajectory_source_frame_name)" />
+    <param name="trajectory_update_rate" type="double" value="$(arg trajectory_update_rate)" />
+    <param name="trajectory_publish_rate" type="double" value="$(arg trajectory_publish_rate)" />
+  </node>
+
+  <node pkg="hector_geotiff" type="geotiff_node" name="hector_geotiff_node" output="screen" launch-prefix="nice -n 15">
+    <remap from="map" to="/dynamic_map" />
+    <param name="map_file_path" type="string" value="$(arg map_file_path)" />
+    <param name="map_file_base_name" type="string" value="$(arg map_file_base_name)" />
+    <param name="geotiff_save_period" type="double" value="0" />
+    <param name="draw_background_checkerboard" type="bool" value="true" />
+    <param name="draw_free_space_grid" type="bool" value="true" />
+    <param name="plugins" type="string" value="hector_geotiff_plugins/TrajectoryMapWriter" />
+  </node>
+
+ <!-- To remotely start a rplidar node on NAO robot-->
+  <machine name="NAO_ROS" address="192.168.5.19" env-loader="/home/nao/catkin_ws/devel/env.sh" user="nao" password="NAOI" default="false"/>
+  <node machine="NAO_ROS" name="rpLidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
+  <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>  
+  <param name="serial_baudrate"     type="int"    value="115200"/>
+  <param name="frame_id"            type="string" value="laser"/>
+  <param name="inverted"            type="bool"   value="true"/>
+  <param name="angle_compensate"    type="bool"   value="true"/>
+  </node>
+
+  <!-- To start a map saver -->
+  <!-- <node name="map_server" pkg="map_server" type="map_saver" /> -->
+
+  <!-- To start move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" />
+  </node>
+  
+  <!-- TF starts here ... -->
+  <node pkg="tf" type="static_transform_publisher" name="map_2_odom" args="0 0 0 0 0 0 /map /odom 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="odom_2_base_footprint" args="0 0 0 0 0 0 /odom /base_footprint 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_footprint_2_base_link" args="0 0 0 0 0 0 /base_footprint /base_link 100"/> 
+  <node pkg="tf" type="static_transform_publisher" name="base_link_2_base_stabilized_link" args="0 0 0 0 0 0 /base_link /base_stabilized 100"/> 
+  <node pkg="tf" type="static_transform_publisher" name="base_stablized_2_base_frame" args="0 0 0 0 0 0 /base_stabilized /base_frame 100"/> 
+  <node pkg="tf" type="static_transform_publisher" name="base_frame_2_laser_link" args="0 0 0 0 0 0 /base_frame /laser 100"/> 
+  <node pkg="tf" type="static_transform_publisher" name="base_2_nav_link" args="0 0 0 0 0 0 /base_frame /nav 100"/>
+
+  <!-- rviz for visulization -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rplidar_ros)/rviz/slam.rviz"/>
+	
+</launch>
