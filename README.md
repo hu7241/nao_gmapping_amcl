@@ -19,5 +19,5 @@
 
   3. Error message "Error while transforming pose: "base_footprint" passed to lookupTransform argument target_frame does not exist." when assigning a goal in rviz.
 
-  4. for larger maps, path planner is not able to plan a complete (only a short segment).
+  4. For larger maps, path planner is not able to plan a complete (only a short segment).
  
