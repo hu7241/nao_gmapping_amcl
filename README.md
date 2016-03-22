@@ -10,7 +10,7 @@
 
   * Use htest.launch for mapping using hector mapping
 
-  * - [x] In the launch files make sure to change the paths to config files accordingly.
+  * - [x] In the launch files make sure to change the paths to _config_, _map_, and _rviz_ files accordingly.
 
 **2. KNOWN BUGS:**
   1. Move_base demonstrates weird behaviors (seemingly unnecessary rotation).
