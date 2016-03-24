@@ -13,6 +13,7 @@ Panels:
         - /Pose Array1
         - /TF1/Frames1
         - /Pose1
+        - /Polygon1
       Splitter Ratio: 0.652174
     Tree Height: 721
   - Class: rviz/Selection
@@ -622,6 +623,13 @@ Visualization Manager:
       Shape: Arrow
       Topic: /pose_stamped
       Value: true
+    - Alpha: 1
+      Class: rviz/Polygon
+      Color: 25; 255; 0
+      Enabled: true
+      Name: Polygon
+      Topic: /move_base/global_costmap/footprint
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 0; 0; 0
@@ -649,11 +657,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 145.015
+      Scale: 271.828
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 9.21517
-      Y: 3.37981
+      X: 3.04889
+      Y: -0.914905
     Saved: ~
 Window Geometry:
   Displays:
@@ -671,5 +679,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1404
-  X: 73
-  Y: 35
+  X: 63
+  Y: 25
