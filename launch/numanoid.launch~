@@ -22,11 +22,13 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
     <arg name="nao_ip" default="192.168.5.19"/>
   </include> 
 
+  <node name="nao_path_follower" pkg="nao_path_follower" type="nao_path_follower"/>
+
   <!-- AMCL NODE--> 
   <node pkg="amcl" type="amcl" name="amcl" clear_params="true">
   
   <!-- OVERALL FILTER PARAMETERS -->
-  <param name="min_particles" value="300"/>
+  <param name="min_particles" value="1000"/>
   <param name="max_particles" value="5000"/>
   <param name="kld_err" value="0.05"/>
   <param name="kld_z" value="0.99"/>
@@ -85,15 +87,11 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
   
   <!-- To start move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
-    <param name="base_global_planner" value="navfn/NavfnROS"/>
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
     <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <!-- <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" /> -->
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="dwa_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/dwa_costmap_params.yaml" command="load" />
-    <!-- <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/local_costmap_params.yaml" command="load" /> -->
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/local_costmap_params.yaml" command="load" />
     <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" />	
   </node>	
   
   <!-- LASER_SCAN_MATCHER HERE -->
@@ -159,8 +157,6 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
     <param name="debug_verify_trick" value="0"/>
     <param name="use_ml_weights" value="0"/>
     <param name="use_sigma_weights" value="0"/>
-
-  </node>
 
   <!-- TF starts here ... -->
   <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="-0.215 0 0 0 0 0 base_link laser 10"/>

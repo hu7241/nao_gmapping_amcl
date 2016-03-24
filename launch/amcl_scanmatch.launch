@@ -5,7 +5,7 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
 
 <launch>   
   <!-- To start a map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="/home/jerry/Desktop/nao_slam_amcl/maps/tiny_map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="/home/jerry/Desktop/nao_slam_amcl/maps/map_goodcopy.yaml"/>
   
   <!-- To remotely start a rplidar node on NAO robot-->
   <machine name="NAO_ROS" address="192.168.5.19" env-loader="/home/nao/catkin_ws/devel/env.sh" user="nao" password="NAOI" default="false"/>
@@ -26,7 +26,7 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
   <node pkg="amcl" type="amcl" name="amcl" clear_params="true">
   
   <!-- OVERALL FILTER PARAMETERS -->
-  <param name="min_particles" value="1000"/>
+  <param name="min_particles" value="300"/>
   <param name="max_particles" value="5000"/>
   <param name="kld_err" value="0.05"/>
   <param name="kld_z" value="0.99"/>
@@ -85,11 +85,14 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
   
   <!-- To start move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
+    <param name="base_global_planner" value="navfn/NavfnROS"/>
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
     <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" /> 
+    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/dwa_local_planner_params.yaml" command="load" />
     <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/local_costmap_params.yaml" command="load" />
     <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" />	
+    <!-- <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" /> -->
   </node>	
   
   <!-- LASER_SCAN_MATCHER HERE -->
