@@ -86,7 +86,7 @@ def saveOnClick(event):
     dir = os.path.dirname(__file__)
     #print dir
     filename = dir+'/locationPoint.txt'
-    #print filename
+    print filename
     ##for checking
     # if os.path.isfile(filename):
     #     print "locationPoint.txt "+"exists"
@@ -110,9 +110,9 @@ def saveOnClick(event):
             +str(quaternionArray[j].y)+","
             +str(quaternionArray[j].z)+","
             +str(quaternionArray[j].w)+"\n")
-            #print s
+            print s
             f.writelines(s)
-    #print "done"
+    print "done"
     global filePath
     filePath.config(text="File path: "+filename)
     f.close()
@@ -144,7 +144,7 @@ def subscribePose():
     global background
 
 def pubDataStaus(dataStatus): 
-    pub = rospy.Publisher('WPsOK', String, queue_size=10)
+    global pub
     pub.publish(dataStatus)
 
 def subscribePoint():
@@ -219,13 +219,14 @@ deleteBtn.grid(row=0, column=0)
 deleteBtn.bind('<Button-1>', deleteOnClick)
 filePath = Label(F5,justify=LEFT,width=80,text="FILE PATH:")
 filePath.grid(row=0, column=1)
-saveBtn = Button(F5, text="SAVE")
+saveBtn = Button(F5, text="UPDATE")
 saveBtn.grid(row=0, column=2)
 saveBtn.bind('<Button-1>', saveOnClick)
 
 saveBtn = Button(F5, text="LOAD")
 saveBtn.grid(row=0, column=3)
 saveBtn.bind('<Button-1>', loadOnClick)
+pub = rospy.Publisher('WPsOK', String, queue_size=10)
 
 if __name__ == '__main__':
     rospy.init_node('gui', anonymous=False)
