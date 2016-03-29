@@ -2,6 +2,6 @@
 <!-- author: Blish Shi -->
 <launch>
 	<node name="voice_nav_voice_net_receiver" pkg="rbx1_nav" type="phone_call.py"/>
-	<node name="voice_nav_goal_publiser" pkg="rbx1_nav" type="nav_asr_3.py"/>
+	<node name="voice_nav_goal_publiser" pkg="rbx1_nav" type="nav_asr_6.py"/>
 	<node name="voice_nav_wp_saver" pkg="rbx1_nav" type="gui.py"/>
 </launch>
