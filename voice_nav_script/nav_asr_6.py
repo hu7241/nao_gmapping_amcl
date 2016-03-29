@@ -40,6 +40,11 @@ class NavTest():
     # Create the waypoints list from txt
     def GetWayPoints(self,Data):
         filename = Data.data
+        #clear all existing marks in rviz
+        for marker in self.makerArray.markers:
+            marker.action = Marker.DELETE
+        self.makerArray_pub.publish(self.makerArray)
+
         # clear former lists
         self.waypoint_list.clear()
         self.marker_list[:] = []
@@ -55,7 +60,7 @@ class NavTest():
             self.waypoint_list[current_wp_name] = Pose(current_point,current_quaternion)
 
         f.close()
-        
+
         self.create_markers()
         self.makerArray_pub.publish(self.makerArray)
 
@@ -97,8 +102,6 @@ class NavTest():
             self.makerArray.markers.append(marker)
 
             marker_id               = marker_id + 1
-
-        rospy.loginfo(self.makerArray)
 
 #thread -> publish marks
 

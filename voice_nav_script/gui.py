@@ -58,20 +58,11 @@ def deleteOnClick(event):
         idx = int(i) - pos
         nameList.delete( idx,idx )
         pos = pos + 1
-        for j in range(idx,(nameArray.__len__()-1)):
-            nameArray[j]=nameArray[j+1]
-            poseArray[j]=poseArray[j+1]
-            orientationArray[j]=orientationArray[j+1]
-            quaternionArray[j]=quaternionArray[j+1]
-        # nameArray[nameArray.__len__()-1]=None
-        # poseArray[nameArray.__len__()-1]=None
-        # orientationArray[nameArray.__len__()-1]=None
-        # quaternionArray[nameArray.__len__()-1]=None
-        
-        del nameArray[nameArray.__len__()-1]
-        del poseArray[nameArray.__len__()-1]
-        del orientationArray[nameArray.__len__()-1]
-        del quaternionArray[nameArray.__len__()-1]
+
+        del nameArray[idx]
+        del poseArray[idx]
+        del orientationArray[idx]
+        del quaternionArray[idx]
 
         print "delete "+str(idx)
     print nameArray
