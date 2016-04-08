@@ -85,7 +85,7 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
   </node>
 
  <!-- To remotely start a rplidar node on NAO robot-->
-  <machine name="NAO_ROS" address="192.168.5.14" env-loader="/home/nao/catkin_ws/devel/env.sh" user="nao" password="NAOD" default="false"/>
+  <machine name="NAO_ROS" address="192.168.5.19" env-loader="/home/nao/catkin_ws/devel/env.sh" user="nao" password="NAOI" default="false"/>
   <node machine="NAO_ROS" name="rpLidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
   <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>  
   <param name="serial_baudrate"     type="int"    value="115200"/>
@@ -99,11 +99,11 @@ this launch file remotely starts a rplidar node on NAO robot, and use it for gma
 
   <!-- To start move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="/home/jerry/Desktop/nao_slam_amcl/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/jerry/Desktop/nao_gmapping/config/base_local_planner_params.yaml" command="load" />
   </node>
   
   <!-- TF starts here ... -->
