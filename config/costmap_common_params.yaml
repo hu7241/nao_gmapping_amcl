@@ -1,0 +1,12 @@
+footprint: [[0.205, 0.205], [-0.205, 0.2050], [-0.2050, -0.2050], [0.2050, -0.2050]]
+inflation_radius: 0.3
+
+
+#Obstacle marking parameters
+obstacle_range: 4.0
+max_obstacle_height: 0.63
+min_obstacle_height: 0.0
+raytrace_range: 5.0
+
+observation_sources: scan
+scan: {data_type: LaserScan, topic: /scan, marking: true, clearing: true, expected_update_rate: 0.25, obstacle_range: 4.0, max_obstacle_height: 0.63, min_obstacle_height: 0.0, raytrace_range: 5.0} 
