@@ -5,13 +5,13 @@ project(nao_slam_amcl)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  dynamic_reconfigure
   gmapping
   hector_mapping
   laser_scan_matcher
   map_server
   move_base
   nao_bringup
-  navigation
   rplidar_ros
   rviz
   tf
@@ -22,40 +22,16 @@ find_package(catkin REQUIRED COMPONENTS
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
 # catkin_python_setup()
 
-################################################
-## Declare ROS dynamic reconfigure parameters ##
-################################################
-
-## To declare and build dynamic reconfigure parameters within this
-## package, follow these steps:
-## * In the file package.xml:
-##   * add a build_depend and a run_depend tag for "dynamic_reconfigure"
-## * In this file (CMakeLists.txt):
-##   * add "dynamic_reconfigure" to
-##     find_package(catkin REQUIRED COMPONENTS ...)
-##   * uncomment the "generate_dynamic_reconfigure_options" section below
-##     and list every .cfg file to be processed
-
-## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
 
 ###################################
 ## catkin specific configuration ##
 ###################################
-## The catkin_package macro generates cmake config files for your package
-## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
-## LIBRARIES: libraries you create in this project that dependent projects also need
-## CATKIN_DEPENDS: catkin_packages dependent projects also need
-## DEPENDS: system dependencies of this project that dependent projects also need
+
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES nao_slam_amcl
-#  CATKIN_DEPENDS gmapping hector_mapping laser_scan_matcher map_server move_base nao_bringup navigation rplidar_ros rviz tf
-#  DEPENDS system_lib
+#    CATKIN_DEPENDS
+#	roscpp
+#	dynamic_reconfigure
+#	tf
 )
 
 ###########
@@ -120,26 +96,22 @@ include_directories(
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-catkin_install_python(PROGRAMS ./src/nao_walker_v2.py
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+catkin_install_python(PROGRAMS src/nao_walker_v2.py
+    DESTINATION /opt/ros/indigo/lib/nao_apps/
 )
 
-catkin_install_python(PROGRAMS ./src/naoqi_joint_states.py
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+catkin_install_python(PROGRAMS launch/nao_partial_py.launch
+    DESTINATION /opt/ros/indigo/share/nao_bringup/launch/
 )
 
-install(DIRECTORY launch
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+catkin_install_python(PROGRAMS launch/walker_v2.launch
+    DESTINATION /opt/ros/indigo/share/nao_apps/launch/
 )
-#############
-## Testing ##
-#############
 
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_nao_slam_amcl.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
+catkin_install_python(PROGRAMS src/naoqi_joint_states.py
+    DESTINATION /opt/ros/indigo/lib/naoqi_driver_py/
+)
 
-## Add folders to be run by python nosetests
-# catkin_add_nosetests(test)
+#install(DIRECTORY launch
+#    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+#)
