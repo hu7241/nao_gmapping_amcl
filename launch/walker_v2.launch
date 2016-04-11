@@ -1,0 +1,39 @@
+<launch>
+  <!--
+  	This pushes the local PYTHONPATH into the launch file, so that the NaoQI API is found.
+    You need to add the Nao's API dir to your PYTHONPATH so that the modules are found.
+  -->
+  <env name="PYTHONPATH" value="$(env PYTHONPATH)" />
+
+  <arg name="nao_ip" default="$(optenv NAO_IP 127.0.0.1)" />
+  <arg name="nao_port" default="$(optenv NAO_PORT 9559)" />
+
+  <node pkg="nao_apps" type="nao_walker_v2.py" name="nao_walker" required="true" args="--pip=$(arg nao_ip) --pport=$(arg nao_port)" output="screen" >
+      <param name="use_walk_pose" value="true" />
+      <param name="use_foot_gait_config" value="true" />
+
+      <param name="head_pitch_angle" value="0.28" />
+      <param name="step_frequency" value="0.5" />
+      <rosparam param="foot_gait_config">
+          [['MaxStepX', 0.06], ['MaxStepY', 0.16], ['MaxStepTheta', 0.349], ['MaxStepFrequency', 1.0], ['StepHeight', 0.015], ['TorsoWx', 0.0], ['TorsoWy', -0.05]]
+      </rosparam>
+
+      <param name="head_pitch_angle_back" value="0.122173" />
+      <param name="step_frequency_back" value="0.5" />
+      <rosparam param="foot_gait_config_back">
+          [['MaxStepX', 0.04], ['MaxStepY', 0.16], ['MaxStepTheta', 0.349], ['MaxStepFrequency', 1.0], ['StepHeight', 0.015], ['TorsoWx', 0.0], ['TorsoWy', 0.05]]
+      </rosparam>
+
+      <param name="head_pitch_angle_left" value="0.122173" />
+      <param name="step_frequency_left" value="0.5" />
+      <rosparam param="foot_gait_config_left">
+          [['MaxStepX', 0.06], ['MaxStepY', 0.101], ['MaxStepTheta', 0.12], ['MaxStepFrequency', 0.9], ['StepHeight', 0.015], ['TorsoWx', 0.0], ['TorsoWy', 0.05]]
+      </rosparam>
+
+      <param name="head_pitch_angle_right" value="0.122173" />
+      <param name="step_frequency_right" value="0.5" />
+      <rosparam param="foot_gait_config_right">
+          [['MaxStepX', 0.06], ['MaxStepY', 0.101], ['MaxStepTheta', 0.12], ['MaxStepFrequency', 0.9], ['StepHeight', 0.018], ['TorsoWx', 0.0], ['TorsoWy', 0.05]]
+      </rosparam>
+  </node>
+</launch>

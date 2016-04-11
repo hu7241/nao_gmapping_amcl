@@ -8,7 +8,7 @@
 * Use htest.launch for mapping using hector mapping
 * -[x] In the launch files make sure to change the paths to _config_, _map_, and _rviz_ files accordingly.
 
-* To use gmapping and hector mapping, joint_states.py needs to be changed (uncomment ln160) 
+* To use gmapping and hector mapping, /opt/ros/indigo/lib/naoqi_driver_py needs to be changed (uncomment ln160) 
  
 **2. KNOWN BUGS:**
 
